@@ -1,49 +1,49 @@
 package ca.concordia.coen448;
 
 
-public class RobotState {
-
-    //direction change
-	public enum Direction {
+public class Robot {
+    // direction change
+    public enum Direction {
         NORTH, EAST, SOUTH, WEST;
-		//anti-clockwise turn
+
+        // anti-clockwise turn
         public Direction turnLeft() {
-            switch (this) {
-                case NORTH: return WEST;
-                case WEST:  return SOUTH;
-                case SOUTH: return EAST;
-                case EAST:  return NORTH;
-                default:    return null; 
-            }
+            return switch (this) {
+                case NORTH -> WEST;
+                case WEST -> SOUTH;
+                case SOUTH -> EAST;
+                case EAST -> NORTH;
+                default -> null;
+            };
         }
-//clockwise turn 
+
+        // clockwise turn
         public Direction turnRight() {
-            switch (this) {
-                case NORTH: return EAST;
-                case EAST:  return SOUTH;
-                case SOUTH: return WEST;
-                case WEST:  return NORTH;
-                default:    return null; 
-            }
+            return switch (this) {
+                case NORTH -> EAST;
+                case EAST -> SOUTH;
+                case SOUTH -> WEST;
+                case WEST -> NORTH;
+                default -> null;
+            };
         }
     }
-	
+
     public enum PenState {
         UP, DOWN
     }
 
-    
     private int x;
     private int y;
     private Direction direction;
     private PenState penState;
 
-   //constructor
-    public RobotState() {
+    // constructor
+    public Robot() {
         this(0, 0, Direction.NORTH, PenState.UP);
     }
 
-    public RobotState(int x, int y, Direction direction, PenState penState) {
+    public Robot(int x, int y, Direction direction, PenState penState) {
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -67,7 +67,6 @@ public class RobotState {
         return penState;
     }
 
-
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
@@ -81,7 +80,7 @@ public class RobotState {
         this.penState = penState;
     }
 
-    //Command to use
+    // Command to use
     public void penUp() {
         this.penState = PenState.UP;
     }
@@ -97,6 +96,7 @@ public class RobotState {
     public void turnRight() {
         this.direction = direction.turnRight();
     }
+
     //increment value
     public void moveForward(int steps) {
         if (direction == Direction.NORTH) {
@@ -109,18 +109,10 @@ public class RobotState {
             x -= steps;
         }
     }
+
     @Override
     public String toString() {
-        return "Position:" +
-                 x +
-                "," + y +
-                " - Pen=" + penState +
-                " - Facing=" + direction +
-                '}';
-    }
-    public static void main(String[] args)
-    {
-    	
+        return "Position: " + x + "," + y + " - Pen=" + penState + " - Facing=" + direction;
     }
 }
 
