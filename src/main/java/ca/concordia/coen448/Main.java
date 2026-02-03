@@ -13,5 +13,15 @@ public class Main {
             // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
             System.out.println("i = " + i);
         }
+        
+        //Testing Robot State Class
+        RobotState robot = new RobotState();
+
+    	robot.penDown();
+    	robot.moveForward(5);
+    	robot.turnRight();
+    	robot.moveForward(3);
+
+    	System.out.println(robot);
     }
 }
