@@ -68,9 +68,7 @@ public class CommandParser {
 
                 case "H" -> invoker.replay();
 
-                case "Q" -> {
-                    running = false;
-                }
+                case "Q" -> running = false;
 
                 default -> System.out.println("Invalid command.");
             }
