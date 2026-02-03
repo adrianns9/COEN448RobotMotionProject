@@ -13,7 +13,6 @@ public class Robot {
                 case WEST -> SOUTH;
                 case SOUTH -> EAST;
                 case EAST -> NORTH;
-                default -> null;
             };
         }
 
@@ -24,7 +23,6 @@ public class Robot {
                 case EAST -> SOUTH;
                 case SOUTH -> WEST;
                 case WEST -> NORTH;
-                default -> null;
             };
         }
     }
@@ -37,6 +35,7 @@ public class Robot {
     private int y;
     private Direction direction;
     private PenState penState;
+    private int[][] floor;
 
     // constructor
     public Robot() {
@@ -67,20 +66,14 @@ public class Robot {
         return penState;
     }
 
-    public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    public void setPenState(PenState penState) {
-        this.penState = penState;
-    }
-
     // Command to use
+    public void reset() {
+        x = 0;
+        y = 0;
+        direction = Direction.NORTH;
+        penState = PenState.UP;
+    }
+
     public void penUp() {
         this.penState = PenState.UP;
     }
@@ -97,16 +90,28 @@ public class Robot {
         this.direction = direction.turnRight();
     }
 
+    public int[] getNextForwardPosition() {
+        int nextX = x;
+        int nextY = y;
+
+        switch (direction) {
+            case NORTH -> nextY += 1;
+            case SOUTH -> nextY -= 1;
+            case EAST -> nextX += 1;
+            case WEST -> nextX -= 1;
+        }
+
+        return new int[]{nextX, nextY};
+    }
+
+
     //increment value
-    public void moveForward(int steps) {
-        if (direction == Direction.NORTH) {
-            y += steps;
-        } else if (direction == Direction.SOUTH) {
-            y -= steps;
-        } else if (direction == Direction.EAST) {
-            x += steps;
-        } else if (direction == Direction.WEST) {
-            x -= steps;
+    public void moveForward() {
+        switch (direction) {
+            case NORTH -> y += 1;
+            case SOUTH -> y -= 1;
+            case EAST -> x += 1;
+            case WEST -> x -= 1;
         }
     }
 
