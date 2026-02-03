@@ -4,10 +4,6 @@ public class Floor {
     private int[][] grid;
     private int size;
 
-    public Floor(int size) {
-        initialize(size);
-    }
-
     public Floor() {
     }
 
