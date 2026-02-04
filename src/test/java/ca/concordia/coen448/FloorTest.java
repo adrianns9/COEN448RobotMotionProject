@@ -30,4 +30,35 @@ public class FloorTest {
         floor.markPosition(1, 2);
         assertEquals(1, floor.getCell(1, 2));
     }
+
+    @Test
+    void getCell_outOfBounds_shouldThrow_R12() {
+        Floor floor = new Floor();
+        floor.initialize(3);
+
+        assertThrows(IllegalArgumentException.class, () -> floor.getCell(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> floor.getCell(0, -1));
+        assertThrows(IllegalArgumentException.class, () -> floor.getCell(3, 0));
+        assertThrows(IllegalArgumentException.class, () -> floor.getCell(0, 3));
+    }
+
+    @Test
+    void markPosition_outOfBounds_shouldNotChangeGrid_R12() {
+        Floor floor = new Floor();
+        floor.initialize(3);
+
+        // mark inside once
+        floor.markPosition(1, 1);
+        assertEquals(1, floor.getCell(1, 1));
+
+        // try marking outside (should be ignored)
+        floor.markPosition(-1, 0);
+        floor.markPosition(3, 0);
+        floor.markPosition(0, -1);
+        floor.markPosition(0, 3);
+
+        // still only the original cell should be marked
+        assertEquals(1, floor.getCell(1, 1));
+    }
+
 }

@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class CommandIntegrationTest {
 
     @Test
@@ -95,5 +98,66 @@ public class CommandIntegrationTest {
                 assertEquals(0, floor.getCell(x, y));
             }
         }
+    }
+
+    @Test
+    void penUpCommand_shouldSetPenToUp() {
+        Robot robot = new Robot();
+        robot.penDown();
+        assertEquals(Robot.PenState.DOWN, robot.getPenState());
+
+        new PenUpCommand(robot).execute();
+
+        assertEquals(Robot.PenState.UP, robot.getPenState());
+    }
+
+    @Test
+    void turnLeftCommand_shouldChangeDirection() {
+        Robot robot = new Robot();
+        Robot.Direction before = robot.getDirection();
+
+        new TurnLeftCommand(robot).execute();
+
+        Robot.Direction after = robot.getDirection();
+        assertNotEquals(before, after);
+    }
+
+    @Test
+    void statusCommand_shouldPrintRobotState() {
+        Robot robot = new Robot();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream old = System.out;
+        System.setOut(new PrintStream(out));
+        try {
+            new StatusCommand(robot).execute();
+        } finally {
+            System.setOut(old);
+        }
+
+        String printed = out.toString().trim();
+        assertFalse(printed.isEmpty(), "StatusCommand should print something");
+        // Optional: check it contains key words depending on your toString()
+        assertTrue(printed.toUpperCase().contains("POSITION") || printed.contains("0,0"));
+    }
+
+    @Test
+    void printFloorCommand_shouldPrintFloorOutput() {
+        Floor floor = new Floor();
+        floor.initialize(3);
+        floor.markPosition(0, 0);
+        floor.markPosition(2, 2);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream old = System.out;
+        System.setOut(new PrintStream(out));
+        try {
+            new PrintFloorCommand(floor).execute();
+        } finally {
+            System.setOut(old);
+        }
+
+        String printed = out.toString();
+        assertTrue(printed.contains("*"), "PrintFloorCommand should print at least one '*'");
     }
 }
