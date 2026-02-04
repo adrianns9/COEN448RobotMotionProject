@@ -2,6 +2,12 @@
 
 This project implements a robot motion simulation on a grid-based floor for COEN448 Winter 2026. The robot can move around the floor, draw paths when the pen is down, and respond to various commands entered by the user.
 
+## Authors
+
+- Céline Ziadé - 40251642
+- Adrian Nico Salvado - 40246591
+- Ruso Kanapathipillai - 40133397
+
 ## Description
 
 The system simulates a robot that navigates an n x n grid floor. The robot starts at position (0,0), facing north, with the pen up. Users can issue commands to control the robot's movement, pen state, and display the floor status.
@@ -112,7 +118,7 @@ The project includes comprehensive unit tests and integration tests.
 ### Running Tests
 
 ```bash
-mvn test
+mvn clean test
 ```
 
 ### Test Coverage
@@ -153,13 +159,3 @@ src/
     ├── MainTest.java
     └── RobotTest.java
 ```
-
-## Authors
-
-- Céline Ziadé - 40251642
-- Adrian Nico Salvado - XXXXXXXX
-- 
-
-## License
-
-This project is for educational purposes as part of COEN448 coursework.
