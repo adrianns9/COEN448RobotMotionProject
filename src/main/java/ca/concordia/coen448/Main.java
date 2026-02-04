@@ -4,12 +4,10 @@ public class Main {
     public static void main(String[] args) {
         // Testing Robot State Class
         Robot robot = new Robot();
+		CommandInvoker invoker = new CommandInvoker();
+        Floor floor = new Floor();
+		CommandParser parser = new CommandParser(robot, floor, invoker);
 
-    	robot.penDown();
-    	robot.moveForward(5);
-    	robot.turnRight();
-    	robot.moveForward(3);
-
-    	System.out.println(robot);
+		parser.run();
     }
 }
