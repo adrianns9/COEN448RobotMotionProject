@@ -35,7 +35,6 @@ public class Robot {
     private int y;
     private Direction direction;
     private PenState penState;
-    private int[][] floor;
 
     // constructor
     public Robot() {
