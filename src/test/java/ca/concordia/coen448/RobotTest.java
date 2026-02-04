@@ -75,4 +75,45 @@ public class RobotTest {
         assertArrayEquals(new int[] { 1, 2 }, west.getNextForwardPosition());
     }
 
+    @Test
+    void moveForward_coversSouthAndWest_R6() {
+        // SOUTH: y should decrease
+        Robot south = new Robot(2, 2, Robot.Direction.SOUTH, Robot.PenState.UP);
+        south.moveForward();
+        assertEquals(2, south.getX());
+        assertEquals(1, south.getY());
+
+        // WEST: x should decrease
+        Robot west = new Robot(2, 2, Robot.Direction.WEST, Robot.PenState.UP);
+        west.moveForward();
+        assertEquals(1, west.getX());
+        assertEquals(2, west.getY());
+    }
+
+    @Test
+    void moveForward_coversNorthAndEast_R6() {
+        // NORTH: y should increase
+        Robot north = new Robot(2, 2, Robot.Direction.NORTH, Robot.PenState.UP);
+        north.moveForward();
+        assertEquals(2, north.getX());
+        assertEquals(3, north.getY());
+
+        // EAST: x should increase
+        Robot east = new Robot(2, 2, Robot.Direction.EAST, Robot.PenState.UP);
+        east.moveForward();
+        assertEquals(3, east.getX());
+        assertEquals(2, east.getY());
+    }
+
+    @Test
+    void moveForward_whenDirectionNull_throwsIllegalState_R12() {
+        Robot robot = new Robot(0, 0, null, Robot.PenState.UP);
+        assertThrows(IllegalStateException.class, robot::moveForward);
+    }
+    
+    @Test
+    void getNextForwardPosition_whenDirectionNull_throwsIllegalState_R12() {
+        Robot robot = new Robot(0, 0, null, Robot.PenState.UP);
+        assertThrows(IllegalStateException.class, robot::getNextForwardPosition);
+    }
 }
