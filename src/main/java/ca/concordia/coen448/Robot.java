@@ -1,6 +1,5 @@
 package ca.concordia.coen448;
 
-
 public class Robot {
     // direction change
     public enum Direction {
@@ -35,7 +34,6 @@ public class Robot {
     private int y;
     private Direction direction;
     private PenState penState;
-    private int[][] floor;
 
     // constructor
     public Robot() {
@@ -49,7 +47,7 @@ public class Robot {
         this.penState = penState;
     }
 
-    //  getters and setters
+    // getters
     public int getX() {
         return x;
     }
@@ -91,6 +89,8 @@ public class Robot {
     }
 
     public int[] getNextForwardPosition() {
+        if (direction == null) throw new IllegalStateException("direction is null");
+
         int nextX = x;
         int nextY = y;
 
@@ -104,9 +104,10 @@ public class Robot {
         return new int[]{nextX, nextY};
     }
 
-
-    //increment value
+    // increment value
     public void moveForward() {
+        if (direction == null) throw new IllegalStateException("direction is null");
+
         switch (direction) {
             case NORTH -> y += 1;
             case SOUTH -> y -= 1;
@@ -120,7 +121,3 @@ public class Robot {
         return "Position: " + x + "," + y + " - Pen=" + penState + " - Facing=" + direction;
     }
 }
-
-
-
-

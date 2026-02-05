@@ -31,4 +31,13 @@ public class Floor {
             System.out.println();
         }
     }
+
+    public int getCell(int x, int y) {
+        if (!isWithin(x, y)) throw new IllegalArgumentException("Out of bounds");
+        return grid[x][y];
+    }
+
+    public int getSize() {
+        return size;
+    }
 }
