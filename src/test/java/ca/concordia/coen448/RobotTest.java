@@ -1,6 +1,7 @@
 package ca.concordia.coen448;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RobotTest {
@@ -63,16 +64,16 @@ public class RobotTest {
     @Test
     void getNextForwardPosition_coversAllDirections_R6() {
         Robot north = new Robot(2, 2, Robot.Direction.NORTH, Robot.PenState.UP);
-        assertArrayEquals(new int[] { 2, 3 }, north.getNextForwardPosition());
+        assertArrayEquals(new int[]{2, 3}, north.getNextForwardPosition());
 
         Robot south = new Robot(2, 2, Robot.Direction.SOUTH, Robot.PenState.UP);
-        assertArrayEquals(new int[] { 2, 1 }, south.getNextForwardPosition());
+        assertArrayEquals(new int[]{2, 1}, south.getNextForwardPosition());
 
         Robot east = new Robot(2, 2, Robot.Direction.EAST, Robot.PenState.UP);
-        assertArrayEquals(new int[] { 3, 2 }, east.getNextForwardPosition());
+        assertArrayEquals(new int[]{3, 2}, east.getNextForwardPosition());
 
         Robot west = new Robot(2, 2, Robot.Direction.WEST, Robot.PenState.UP);
-        assertArrayEquals(new int[] { 1, 2 }, west.getNextForwardPosition());
+        assertArrayEquals(new int[]{1, 2}, west.getNextForwardPosition());
     }
 
     @Test
@@ -110,7 +111,7 @@ public class RobotTest {
         Robot robot = new Robot(0, 0, null, Robot.PenState.UP);
         assertThrows(IllegalStateException.class, robot::moveForward);
     }
-    
+
     @Test
     void getNextForwardPosition_whenDirectionNull_throwsIllegalState_R12() {
         Robot robot = new Robot(0, 0, null, Robot.PenState.UP);

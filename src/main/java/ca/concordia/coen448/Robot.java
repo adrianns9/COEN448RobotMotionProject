@@ -47,7 +47,7 @@ public class Robot {
         this.penState = penState;
     }
 
-    // getters and setters
+    // getters
     public int getX() {
         return x;
     }
@@ -89,8 +89,7 @@ public class Robot {
     }
 
     public int[] getNextForwardPosition() {
-        if (direction == null)
-            throw new IllegalStateException("direction is null");
+        if (direction == null) throw new IllegalStateException("direction is null");
 
         int nextX = x;
         int nextY = y;
@@ -102,13 +101,13 @@ public class Robot {
             case WEST -> nextX -= 1;
         }
 
-        return new int[] { nextX, nextY };
+        return new int[]{nextX, nextY};
     }
 
     // increment value
     public void moveForward() {
-        if (direction == null)
-            throw new IllegalStateException("direction is null");
+        if (direction == null) throw new IllegalStateException("direction is null");
+
         switch (direction) {
             case NORTH -> y += 1;
             case SOUTH -> y -= 1;
