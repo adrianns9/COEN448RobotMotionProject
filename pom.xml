@@ -38,6 +38,7 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <executions>
+					
                     <!-- attaches jacoco agent during tests -->
                     <execution>
                     <id>prepare-agent</id>
@@ -54,6 +55,56 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+                  <execution>
+    <id>check</id>
+    <phase>verify</phase>
+    <goals>
+        <goal>check</goal>
+    </goals>
+    <configuration>
+        <rules>
+            <rule>
+                <element>BUNDLE</element> <!-- Apply thresholds to the whole project -->
+                <limits>
+                    <!-- Function coverage (METHOD) -->
+                    <limit>
+                        <counter>METHOD</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.95</minimum> <!-- 95% threshold -->
+                    </limit>
+
+                    <!-- Statement coverage (INSTRUCTION) -->
+                    <limit>
+                        <counter>INSTRUCTION</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.90</minimum> <!-- 90% threshold -->
+                    </limit>
+
+                    <!-- Branch/Path coverage (BRANCH) -->
+                    <limit>
+                        <counter>BRANCH</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.90</minimum> <!-- 90% threshold -->
+                    </limit>
+
+                    <!-- Condition coverage (COMPLEXITY) -->
+                    <limit>
+                        <counter>COMPLEXITY</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.95</minimum> <!-- 95% threshold -->
+                    </limit>
+
+                    <!-- Line coverage (LINE) -->
+                    <limit>
+                        <counter>LINE</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.95</minimum> <!-- 95% threshold -->
+                    </limit>
+                </limits>
+            </rule>
+        </rules>
+    </configuration>
+</execution>  
                 </executions>
             </plugin>
         </plugins>
