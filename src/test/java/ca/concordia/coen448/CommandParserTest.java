@@ -24,7 +24,7 @@ public class CommandParserTest {
         try {
             Robot robot = new Robot();
             Floor floor = new Floor();
-            CommandInvoker invoker = new CommandInvoker();
+            CommandInvoker invoker = new CommandInvoker(robot, floor);
             CommandParser parser = new CommandParser(robot, floor, invoker);
 
             parser.run();

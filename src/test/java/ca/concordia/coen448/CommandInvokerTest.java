@@ -13,7 +13,9 @@ public class CommandInvokerTest {
 
     @Test
     void execute_addsToHistory_andReplayReExecutes() {
-        CommandInvoker invoker = new CommandInvoker();
+    	Robot testRobot = new Robot();
+    	Floor testFloor = new Floor();
+        CommandInvoker invoker = new CommandInvoker(testRobot,testFloor);
         AtomicInteger counter = new AtomicInteger(0);
 
         Command cmd = counter::incrementAndGet;

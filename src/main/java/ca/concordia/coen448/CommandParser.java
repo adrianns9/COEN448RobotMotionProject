@@ -34,13 +34,24 @@ public class CommandParser {
 
         try {
             switch (cmd) {
-                case "I" -> invoker.execute(
-                        new InitCommand(robot, floor, Integer.parseInt(tokens[1]))
-                );
-
-                case "M" -> invoker.execute(
-                        new MoveCommand(robot, floor, Integer.parseInt(tokens[1]))
-                );
+                case "I" ->  {
+                    int size = Integer.parseInt(tokens[1]);
+                   
+                    if (size > 0) {
+                        invoker.execute(new InitCommand(robot, floor, size));
+                    } else {
+                        System.out.println("Invalid command: Floor size must be greater than zero.");
+                    }
+                }
+                case "M" -> {
+                    int steps = Integer.parseInt(tokens[1]);
+                   
+                    if (steps >= 0) {
+                        invoker.execute(new MoveCommand(robot, floor, steps));
+                    } else {
+                        System.out.println("Invalid command: Move steps cannot be negative.");
+                    }
+                }
 
                 case "D" -> invoker.execute(
                         new PenDownCommand(robot, floor)
