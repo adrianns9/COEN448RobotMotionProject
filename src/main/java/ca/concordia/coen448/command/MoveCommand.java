@@ -16,18 +16,19 @@ public class MoveCommand implements Command {
 
     @Override
     public void execute() {
-        // Move the robot one step at a time
+        if (steps < 0) {
+            throw new IllegalArgumentException("Invalid command: Move steps cannot be negative.");
+        }
+
         for (int i = 0; i < steps; i++) {
-            // First, check if next position forward is outside of floor
             int[] position = robot.getNextForwardPosition();
+
             if (!floor.isWithin(position[0], position[1])) {
                 break;
             }
 
-            // Move the robot
             robot.moveForward();
 
-            // Then, if pen is down, mark the current position on the floor
             if (robot.getPenState() == Robot.PenState.DOWN) {
                 int x = robot.getX();
                 int y = robot.getY();

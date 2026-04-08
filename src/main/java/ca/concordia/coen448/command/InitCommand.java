@@ -16,6 +16,10 @@ public class InitCommand implements Command {
 
     @Override
     public void execute() {
+        if (size <= 0) {
+            throw new IllegalArgumentException("Invalid command: Floor size must be greater than zero.");
+        }
+
         floor.initialize(size);
         robot.reset();
     }

@@ -20,7 +20,8 @@ public class CommandParser {
     public void run() {
         while (running) {
             System.out.print("> Enter command: ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine()
+                .trim();
 
             if (input.isEmpty()) continue;
 
@@ -34,48 +35,25 @@ public class CommandParser {
 
         try {
             switch (cmd) {
-                case "I" ->  {
+                case "I" -> {
                     int size = Integer.parseInt(tokens[1]);
-                   
-                    if (size > 0) {
-                        invoker.execute(new InitCommand(robot, floor, size));
-                    } else {
-                        System.out.println("Invalid command: Floor size must be greater than zero.");
-                    }
+                    invoker.execute(new InitCommand(robot, floor, size));
                 }
                 case "M" -> {
                     int steps = Integer.parseInt(tokens[1]);
-                   
-                    if (steps >= 0) {
-                        invoker.execute(new MoveCommand(robot, floor, steps));
-                    } else {
-                        System.out.println("Invalid command: Move steps cannot be negative.");
-                    }
+                    invoker.execute(new MoveCommand(robot, floor, steps));
                 }
+                case "D" -> invoker.execute(new PenDownCommand(robot, floor));
 
-                case "D" -> invoker.execute(
-                        new PenDownCommand(robot, floor)
-                );
+                case "U" -> invoker.execute(new PenUpCommand(robot));
 
-                case "U" -> invoker.execute(
-                        new PenUpCommand(robot)
-                );
+                case "R" -> invoker.execute(new TurnRightCommand(robot));
 
-                case "R" -> invoker.execute(
-                        new TurnRightCommand(robot)
-                );
+                case "L" -> invoker.execute(new TurnLeftCommand(robot));
 
-                case "L" -> invoker.execute(
-                        new TurnLeftCommand(robot)
-                );
+                case "C" -> invoker.execute(new StatusCommand(robot));
 
-                case "C" -> invoker.execute(
-                        new StatusCommand(robot)
-                );
-
-                case "P" -> invoker.execute(
-                        new PrintFloorCommand(floor)
-                );
+                case "P" -> invoker.execute(new PrintFloorCommand(floor));
 
                 case "H" -> invoker.replay();
 
@@ -84,7 +62,7 @@ public class CommandParser {
                 default -> System.out.println("Invalid command.");
             }
         } catch (Exception e) {
-            System.out.println("Invalid command syntax.");
+            System.out.println(e.getMessage()); // show actual error reason
         }
     }
 }
