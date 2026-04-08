@@ -61,8 +61,14 @@ public class CommandParser {
 
                 default -> System.out.println("Invalid command.");
             }
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            // Covers invalid integers AND missing arguments
+            System.out.println("Invalid command syntax.");
+        } catch (IllegalArgumentException e) {
+            // From MoveCommand / InitCommand validation
+            System.out.println(e.getMessage());
         } catch (Exception e) {
-            System.out.println(e.getMessage()); // show actual error reason
+            System.out.println("Invalid command syntax.");
         }
     }
 }
